@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Economy & Asian Models Flash Revision</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        },
+                        darkbg: '#0f172a',
+                        cardbg: '#1e293b'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- JS Canvas Confetti for Quiz Completion -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        /* Card Flip 3D Perspective */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 lg:px-8 py-3">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-indigo-600 rounded-xl shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid fa-brain text-xl text-white"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Global Economy & Asian Models — Rapid Active Recall Studio</h1>
+                    <p class="text-xs text-slate-400">4 Waves • Brandt Line • MNCs • McWorld • EOI • (Neo)Colonialism</p>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 text-sm font-medium w-full sm:w-auto overflow-x-auto">
+                <button onclick="switchTab('flashcards')" id="tab-flashcards" class="nav-btn px-4 py-2 rounded-lg transition flex items-center gap-2 text-indigo-400 bg-slate-800">
+                    <i class="fa-solid fa-layer-group"></i> Flashcards
+                </button>
+                <button onclick="switchTab('matching')" id="tab-matching" class="nav-btn px-4 py-2 rounded-lg transition flex items-center gap-2 text-slate-400 hover:text-slate-200">
+                    <i class="fa-solid fa-puzzle-piece"></i> Match Drill
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-btn px-4 py-2 rounded-lg transition flex items-center gap-2 text-slate-400 hover:text-slate-200">
+                    <i class="fa-solid fa-bolt"></i> Speed Quiz
+                </button>
+                <button onclick="switchTab('cheatsheet')" id="tab-cheatsheet" class="nav-btn px-4 py-2 rounded-lg transition flex items-center gap-2 text-slate-400 hover:text-slate-200">
+                    <i class="fa-solid fa-book-open"></i> Cheat Sheet
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-8">
+
+        <!-- SECTION 1: FLASHCARDS -->
+        <section id="sec-flashcards" class="space-y-6">
+            <!-- Filter & Status Bar -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900 p-4 rounded-2xl border border-slate-800">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider mr-2">Topic Filter:</span>
+                    <button onclick="filterFlashcards('all')" class="fc-filter active px-3 py-1.5 rounded-lg text-xs font-medium bg-indigo-600 text-white transition">All Topics</button>
+                    <button onclick="filterFlashcards('waves')" class="fc-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">4 Waves</button>
+                    <button onclick="filterFlashcards('divide')" class="fc-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">North/South & Brandt</button>
+                    <button onclick="filterFlashcards('concepts')" class="fc-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">MNCs, McWorld & EOI</button>
+                </div>
+                <div class="flex items-center gap-4 text-xs">
+                    <button onclick="shuffleFlashcards()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-shuffle text-indigo-400"></i> Shuffle
+                    </button>
+                    <div class="flex items-center gap-1.5 text-emerald-400 font-semibold bg-emerald-950/50 px-3 py-1.5 rounded-lg border border-emerald-800/50">
+                        <i class="fa-solid fa-circle-check"></i> Got It: <span id="count-gotit">0</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-rose-400 font-semibold bg-rose-950/50 px-3 py-1.5 rounded-lg border border-rose-800/50">
+                        <i class="fa-solid fa-circle-xmark"></i> Review: <span id="count-review">0</span>
+                    </div>
+                    <button onclick="resetFlashcardProgress()" class="text-slate-400 hover:text-slate-200 underline text-xs">Reset</button>
+                </div>
+            </div>
+
+            <!-- Card Stack Viewer Container -->
+            <div class="max-w-xl mx-auto space-y-4">
+                <div class="flex justify-between items-center text-sm text-slate-400 px-1">
+                    <span id="fc-category-badge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-950 text-indigo-300 border border-indigo-800">Category</span>
+                    <span>Card <strong id="fc-index" class="text-slate-200">1</strong> of <span id="fc-total">0</span></span>
+                </div>
+
+                <!-- 3D Flip Card -->
+                <div class="perspective-1000 w-full h-80 cursor-pointer select-none" onclick="flipCard()">
+                    <div id="flashcard-inner" class="relative w-full h-full duration-500 transform-style-3d transition-transform shadow-2xl rounded-2xl">
+                        <!-- Card Front -->
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950 border border-indigo-500/30 rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden shadow-xl">
+                            <span class="text-xs uppercase tracking-widest text-indigo-400 font-semibold flex items-center gap-1">
+                                <i class="fa-solid fa-hand-pointer text-xs animate-bounce"></i> Click card to reveal explanation
+                            </span>
+                            <div class="my-auto px-4">
+                                <h2 id="fc-front-title" class="text-2xl font-black text-white tracking-wide leading-snug">Term Title</h2>
+                                <p id="fc-front-subtitle" class="text-sm text-slate-400 mt-2">Diagnostic Key Concept</p>
+                            </div>
+                            <div class="text-xs text-slate-500">Tap spacebar or click to flip</div>
+                        </div>
+
+                        <!-- Card Back -->
+                        <div class="absolute inset-0 w-full h-full bg-slate-900 border border-slate-700 rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow-xl overflow-y-auto">
+                            <span class="text-xs uppercase tracking-widest text-emerald-400 font-semibold">Active Recall Explanation</span>
+                            <div class="my-auto space-y-3 px-2 text-left w-full">
+                                <p id="fc-back-text" class="text-slate-200 text-base leading-relaxed">Explanation content goes here.</p>
+                                <div id="fc-back-bullets" class="text-xs text-indigo-300 space-y-1 bg-indigo-950/40 p-3 rounded-xl border border-indigo-900/50">
+                                    <!-- Dynamic takeaway points -->
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-500">Click to flip back</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls & Self Assessment Buttons -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center justify-between gap-3">
+                        <button onclick="prevCard()" class="flex-1 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 font-semibold text-sm transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-arrow-left"></i> Previous
+                        </button>
+                        <button onclick="markCard(false)" class="px-5 py-3 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 font-semibold text-sm transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-xmark"></i> Need Review
+                        </button>
+                        <button onclick="markCard(true)" class="px-5 py-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-semibold text-sm transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-check"></i> Got It
+                        </button>
+                        <button onclick="nextCard()" class="flex-1 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 font-semibold text-sm transition flex items-center justify-center gap-2">
+                            Next <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MATCHING DRILL -->
+        <section id="sec-matching" class="hidden space-y-6">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-puzzle-piece text-indigo-400"></i> Speed Memory Match Drill
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">Match each concept tile on the left with its exact diagnostic definition on the right.</p>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="text-center">
+                        <span class="text-xs text-slate-400 block uppercase tracking-wider">Moves</span>
+                        <span id="match-moves" class="text-xl font-mono font-bold text-indigo-300">0</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-xs text-slate-400 block uppercase tracking-wider">Timer</span>
+                        <span id="match-timer" class="text-xl font-mono font-bold text-amber-400">00:00</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-xs text-slate-400 block uppercase tracking-wider">Matches</span>
+                        <span id="match-score" class="text-xl font-mono font-bold text-indigo-400">0 / 10</span>
+                    </div>
+                    <button onclick="initMatchingGame()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> Reset Drill
+                    </button>
+                </div>
+            </div>
+
+            <!-- Matching Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Terms Column -->
+                <div class="space-y-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 px-1">Key Terms & Concepts</h3>
+                    <div id="terms-column" class="space-y-3">
+                        <!-- Dynamic Terms -->
+                    </div>
+                </div>
+                <!-- Definitions Column -->
+                <div class="space-y-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 px-1">Diagnostic Descriptions</h3>
+                    <div id="defs-column" class="space-y-3">
+                        <!-- Dynamic Definitions -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SPEED DIAGNOSTIC QUIZ -->
+        <section id="sec-quiz" class="hidden space-y-6 max-w-3xl mx-auto">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Rapid Recall Exam Quiz</span>
+                        <h2 class="text-xl font-bold mt-1">Full Diagnostic Checkpoint</h2>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-slate-400 block">Question</span>
+                        <span class="text-lg font-bold text-indigo-400"><span id="quiz-current-num">1</span> / <span id="quiz-total-num">10</span></span>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div id="quiz-progress" class="bg-indigo-500 h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <!-- Active Quiz Box -->
+            <div id="quiz-card" class="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-800 space-y-6 shadow-xl">
+                <h3 id="quiz-question-text" class="text-lg md:text-xl font-semibold leading-relaxed text-slate-100">
+                    Loading question...
+                </h3>
+
+                <!-- Options -->
+                <div id="quiz-options-container" class="space-y-3">
+                    <!-- Dynamic Options -->
+                </div>
+
+                <!-- Feedback Box (Hidden initially) -->
+                <div id="quiz-feedback" class="hidden p-4 rounded-xl border space-y-2">
+                    <div class="flex items-center gap-2 font-bold text-sm" id="feedback-title">
+                        <!-- Correct/Incorrect badge -->
+                    </div>
+                    <p id="feedback-explanation" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p>
+                </div>
+
+                <div class="flex justify-end pt-2">
+                    <button id="quiz-next-btn" onclick="nextQuizQuestion()" disabled class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-xl transition flex items-center gap-2">
+                        Next Question <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Results Screen (Hidden initially) -->
+            <div id="quiz-results" class="hidden bg-slate-900 p-8 rounded-2xl border border-slate-800 text-center space-y-6">
+                <div class="w-20 h-20 bg-indigo-600/20 text-indigo-400 border border-indigo-500/40 rounded-full flex items-center justify-center mx-auto text-3xl">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-black text-white">Diagnostic Quiz Completed!</h2>
+                    <p class="text-slate-400 text-sm mt-1">Here is how you performed on this full recall session:</p>
+                </div>
+                <div class="inline-block bg-slate-950 px-8 py-4 rounded-2xl border border-slate-800">
+                    <div class="text-4xl font-black text-indigo-400" id="quiz-final-score">0 / 0</div>
+                    <div class="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1" id="quiz-final-pct">0% Accuracy</div>
+                </div>
+                <p id="quiz-evaluation" class="text-sm text-slate-300 max-w-md mx-auto"></p>
+                <div>
+                    <button onclick="resetQuiz()" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm rounded-xl transition inline-flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> Retake Diagnostic Quiz
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: CHEAT SHEET -->
+        <section id="sec-cheatsheet" class="hidden space-y-8">
+            <div class="flex justify-between items-center bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-amber-400"></i> Rapid Exam Cheat Sheet
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">High-yield summary tables for last-minute short-term memory scanning.</p>
+                </div>
+                <button onclick="window.print()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Print / Save
+                </button>
+            </div>
+
+            <!-- Table 1: The 4 Middle Class Expansion Waves -->
+            <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                <div class="bg-slate-800/60 p-4 border-b border-slate-700/60 flex items-center justify-between">
+                    <h3 class="font-bold text-sm text-indigo-300 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line"></i> The 4-Wave Asian Middle Class Model
+                    </h3>
+                    <span class="text-xs bg-indigo-950 text-indigo-300 border border-indigo-800 px-2 py-0.5 rounded-full font-medium">Core Exam Topic</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs md:text-sm">
+                        <thead class="bg-slate-950/60 text-slate-400 uppercase tracking-wider text-[11px] border-b border-slate-800">
+                            <tr>
+                                <th class="p-3.5">Wave</th>
+                                <th class="p-3.5">Economies Involved</th>
+                                <th class="p-3.5">Primary Growth Engine</th>
+                                <th class="p-3.5">Restructured Strategy</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-200">
+                            <tr class="hover:bg-slate-800/30 transition">
+                                <td class="p-3.5 font-bold text-white">1st Wave</td>
+                                <td class="p-3.5">Japan</td>
+                                <td class="p-3.5">Post-WWII Heavy Industry (Steel mills, shipbuilding, automobiles, heavy machinery)</td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-400">Traditional Factories</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/30 transition">
+                                <td class="p-3.5 font-bold text-white">2nd Wave</td>
+                                <td class="p-3.5">Asian Tigers (South Korea, Taiwan, Hong Kong, Singapore)</td>
+                                <td class="p-3.5">High-Tech Manufacturing, Export-Oriented Industrialization (EOI), Semiconductors</td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-400">High-Tech EOI</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/30 transition bg-indigo-950/20">
+                                <td class="p-3.5 font-bold text-indigo-300">3rd Wave</td>
+                                <td class="p-3.5">SE Asian Tigers / Cubs (Philippines, Thailand, Malaysia, Indonesia)</td>
+                                <td class="p-3.5">
+                                    <strong class="text-white">Services & Foreign Currency over Heavy Factories:</strong> Call centers (BPO), money exchange (OFW remittances), light electronics assembly.
+                                </td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">YES (BPO + OFW)</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/30 transition bg-indigo-950/20">
+                                <td class="p-3.5 font-bold text-indigo-300">4th Wave</td>
+                                <td class="p-3.5">China (Urban expansion: Shenzhen, Shanghai, Beijing)</td>
+                                <td class="p-3.5">Post-1978 SEZs (Special Economic Zones) under Deng Xiaoping, foreign FDI, rural to urban transition, state capitalism.</td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">YES (Communism to SEZs)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Table 2: Global North vs South & Brandt Line Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                    <div class="bg-slate-800/60 p-4 border-b border-slate-700/60">
+                        <h3 class="font-bold text-sm text-indigo-300 flex items-center gap-2">
+                            <i class="fa-solid fa-globe"></i> Global North vs. Global South Stats
+                        </h3>
+                    </div>
+                    <div class="p-4 space-y-4 text-xs md:text-sm">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                                <div class="text-slate-400 font-medium text-[11px]">Global North Population</div>
+                                <div class="text-2xl font-black text-indigo-400 mt-0.5">25% <span class="text-xs font-normal text-slate-400">(1/4)</span></div>
+                                <div class="text-[11px] text-slate-400 mt-1">Controls <strong class="text-indigo-300">80% (4/5)</strong> income & <strong class="text-indigo-300">90%</strong> manufacturing.</div>
+                            </div>
+                            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                                <div class="text-slate-400 font-medium text-[11px]">Global South Population</div>
+                                <div class="text-2xl font-black text-emerald-400 mt-0.5">75% <span class="text-xs font-normal text-slate-400">(3/4)</span></div>
+                                <div class="text-[11px] text-slate-400 mt-1">Access to only <strong class="text-emerald-300">20% (1/5)</strong> income; history of colonialism.</div>
+                            </div>
+                        </div>
+                        <div class="bg-indigo-950/40 p-3.5 rounded-xl border border-indigo-900/60 text-xs space-y-1">
+                            <strong class="text-indigo-300 block">The Brandt Line (1980) Key Rule:</strong>
+                            <p class="text-slate-300">Proposed by Willy Brandt. Loops far south around <span class="text-amber-300 font-semibold">Australia & New Zealand</span> to include them in the Global North based on GDP per capita despite geography.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Term Flash Summary -->
+                <div class="bg-slate-900 rounded-2xl border border-slate-800 p-4 space-y-3">
+                    <h3 class="font-bold text-sm text-indigo-300 flex items-center gap-2">
+                        <i class="fa-solid fa-key"></i> High-Yield Formulaic Takeaways
+                    </h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                            <span class="font-bold text-slate-100">Restructuring Formula:</span>
+                            <p class="text-slate-400 mt-0.5">3rd Wave = BPOs + Money Exchange (OFWs) + Electronics Assembly (Skipped Heavy Steel/Cars).</p>
+                        </div>
+                        <div class="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                            <span class="font-bold text-slate-100">Barber’s McWorld:</span>
+                            <p class="text-slate-400 mt-0.5">Global commercial uniform consumer culture driven by MNCs & Western capitalism vs. local traditional backlash ("Jihad").</p>
+                        </div>
+                        <div class="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                            <span class="font-bold text-slate-100">EOI vs ISI:</span>
+                            <p class="text-slate-400 mt-0.5">EOI targets Global North buyers for export wealth; ISI tried to replace imports with local production.</p>
+                        </div>
+                        <div class="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                            <span class="font-bold text-slate-100">Job Displacement Disadvantage:</span>
+                            <p class="text-slate-400 mt-0.5">Structural unemployment when traditional agricultural or factory workers lack skills for new service/BPO sectors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+        <p>Short-Term Memory Active Recall Matrix • Asian Economic Models & Global Inequality Exam Prep</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // ==========================================
+        // DATA SOURCES (FULLY COVERING ALL TOPICS)
+        // ==========================================
+        const FLASHCARD_DATA = [
+            {
+                id: 1,
+                category: "waves",
+                categoryLabel: "4 Waves Model",
+                frontTitle: "1st Wave Middle Class",
+                frontSubtitle: "Japan (Heavy Industry)",
+                backText: "Japan's post-WWII heavy industrialization expansion.",
+                bullets: ["Built on heavy industrial plants: steel mills, shipyards, heavy machinery, cars.", "Traditional manufacturing path inside domestic borders."]
+            },
+            {
+                id: 2,
+                category: "waves",
+                categoryLabel: "4 Waves Model",
+                frontTitle: "2nd Wave (Asian Tigers)",
+                frontSubtitle: "South Korea, Taiwan, HK, Singapore",
+                backText: "High-tech Export-Oriented Industrialization (EOI).",
+                bullets: ["Driven by EOI producing high-tech goods for rich Global North markets.", "Semiconductors, electronics, advanced manufacturing, shipping hubs."]
+            },
+            {
+                id: 3,
+                category: "waves",
+                categoryLabel: "4 Waves Model",
+                frontTitle: "3rd Wave (Restructured SE Asian Tigers)",
+                frontSubtitle: "Philippines, Thailand, Malaysia, Indonesia",
+                backText: "Middle class formed without reliance on heavy industrial factories.",
+                bullets: ["Restructured via BPOs (Call centers / services).", "OFW Remittances (Foreign exchange directly into families).", "Light electronics assembly."]
+            },
+            {
+                id: 4,
+                category: "waves",
+                categoryLabel: "4 Waves Model",
+                frontTitle: "4th Wave (Restructured China)",
+                frontSubtitle: "Post-1978 Deng Xiaoping Reforms",
+                backText: "Transformation from rigid communism to state capitalism.",
+                bullets: ["Creation of Special Economic Zones (SEZs: Shenzhen, Shanghai, Beijing).", "Attracted foreign direct investment (FDI), becoming the world's factory.", "Massive rural-to-urban population transition."]
+            },
+            {
+                id: 5,
+                category: "divide",
+                categoryLabel: "Global Divide",
+                frontTitle: "Global North Statistics",
+                frontSubtitle: "Developed Societies",
+                backText: "Europe, North America, Japan, plus Australia & New Zealand.",
+                bullets: ["Holds only 25% (1/4) of the global population.", "Controls 80% (4/5) of global income.", "Holds 90% of global manufacturing power."]
+            },
+            {
+                id: 6,
+                category: "divide",
+                categoryLabel: "Global Divide",
+                frontTitle: "Global South Statistics",
+                frontSubtitle: "Developing Nations",
+                backText: "Africa, Latin America, and Developing Asia.",
+                bullets: ["Contains 75% (3/4) of the world population.", "Access to only 20% (1/5) of global income.", "Characterized by a historical legacy of colonialism & neocolonialism."]
+            },
+            {
+                id: 7,
+                category: "divide",
+                categoryLabel: "Global Divide",
+                frontTitle: "The Brandt Line (1980)",
+                frontSubtitle: "Willy Brandt Visual Boundary",
+                backText: "Imaginary dividing line based on GDP per capita, not geography.",
+                bullets: ["Divided wealthy North from developing South.", "Loops far south around Australia & New Zealand to place them in the Global North."]
+            },
+            {
+                id: 8,
+                category: "concepts",
+                categoryLabel: "Concepts & Drivers",
+                frontTitle: "Multinational Corporations (MNCs)",
+                frontSubtitle: "Engines of FDI",
+                backText: "Parent business enterprises operating production/services across multiple countries.",
+                bullets: ["Primary driver of Foreign Direct Investment (FDI).", "Headquartered in Global North; operations in Global South to leverage labor/resources.", "Drives global value chains."]
+            },
+            {
+                id: 9,
+                category: "concepts",
+                categoryLabel: "Concepts & Drivers",
+                frontTitle: "Benjamin Barber's 'McWorld'",
+                frontSubtitle: "Cultural Homogenization",
+                backText: "The expansion of uniform corporate commercial culture globally.",
+                bullets: ["Driven by MNCs, Western consumer capitalism, and communication tech.", "Creates standardized consumer lifestyle worldwide.", "Opposed by local ethnic/religious fragmentation ('Jihad')."]
+            },
+            {
+                id: 10,
+                category: "concepts",
+                categoryLabel: "Concepts & Drivers",
+                frontTitle: "Job Displacement",
+                frontSubtitle: "Economic Disadvantage",
+                backText: "Structural unemployment caused by rapid economic shifts or MNC offshoring.",
+                bullets: ["Displaces traditional agricultural or basic local manufacturing workers.", "Causes skill mismatches when economies transition directly to BPO services."]
+            },
+            {
+                id: 11,
+                category: "concepts",
+                categoryLabel: "Concepts & Drivers",
+                frontTitle: "Export-Oriented Industrialization (EOI)",
+                frontSubtitle: "Asian Growth Strategy",
+                backText: "Manufacturing products aimed directly at wealthy foreign markets.",
+                bullets: ["Replaced Import Substitution Industrialization (ISI).", "Targeted buyers in the Global North to generate foreign exchange capital."]
+            },
+            {
+                id: 12,
+                category: "concepts",
+                categoryLabel: "Concepts & Drivers",
+                frontTitle: "Imperialism vs. Colonialism vs. Neocolonialism",
+                frontSubtitle: "Power & Control Systems",
+                backText: "Frameworks explaining foreign dominance over developing regions.",
+                bullets: ["Imperialism = broad policy/mindset of extending national dominance.", "Colonialism = direct physical settlement and foreign governance.", "Neocolonialism = modern economic control via debt, MNCs, and trade leverage."]
+            },
+            {
+                id: 13,
+                category: "concepts",
+                categoryLabel: "Concepts & Drivers",
+                frontTitle: "Heavy Industrial Plants",
+                frontSubtitle: "1st & 2nd Wave Engines",
+                backText: "Massive manufacturing facilities turning raw materials into capital goods.",
+                bullets: ["Examples: Steel mills, automotive assembly plants, shipyards, refineries.", "Requires massive capital; skipped by 3rd Wave nations."]
+            },
+            {
+                id: 14,
+                category: "waves",
+                categoryLabel: "4 Waves Model",
+                frontTitle: "Money Exchange & Remittances",
+                frontSubtitle: "3rd Wave Wealth Engine",
+                backText: "How OFWs create domestic middle-class wealth directly.",
+                bullets: ["Foreign currencies (USD, AED) are exchanged into local currency.", "Spurs domestic housing, retail, and service sectors without needing steel mills."]
+            },
+            {
+                id: 15,
+                category: "concepts",
+                categoryLabel: "Concepts & Drivers",
+                frontTitle: "Intergovernmental Sovereignty",
+                frontSubtitle: "Global Governance Rule",
+                backText: "State-to-state political processes.",
+                bullets: ["Nations retain 100% of their political sovereignty.", "Differs from MNCs which operate market-driven cross-border value chains."]
+            }
+        ];
+
+        const MATCHING_PAIRS = [
+            { id: 1, term: "1st Wave Middle Class", def: "Japan's post-WWII heavy industrialization (steel, cars, shipyards)." },
+            { id: 2, term: "2nd Wave Asian Tigers", def: "South Korea, Taiwan, HK, Singapore using high-tech EOI." },
+            { id: 3, term: "3rd Wave Restructuring", def: "BPOs, OFW Remittances/Money Exchange, and Light Electronics Assembly." },
+            { id: 4, term: "4th Wave China SEZs", def: "Deng Xiaoping's post-1978 state capitalism in Shenzhen & Shanghai." },
+            { id: 5, term: "Global North Stats", def: "Holds 25% of population but controls 80% income and 90% manufacturing." },
+            { id: 6, term: "Global South Stats", def: "Holds 75% of population with access to only 20% of global wealth." },
+            { id: 7, term: "Brandt Line Loop", def: "Extends far south to group Australia & NZ into the Global North." },
+            { id: 8, term: "Barber's McWorld", def: "Uniform commercial capitalism and Western consumer culture via MNCs." },
+            { id: 9, term: "Export-Oriented Industrialization", def: "Manufacturing strategy producing goods aimed for rich Global North buyers." },
+            { id: 10, term: "Job Displacement", def: "Structural unemployment disadvantage when traditional labor is replaced." }
+        ];
+
+        const QUIZ_QUESTIONS = [
+            {
+                question: "Why is the 3rd Wave (Philippines, Thailand, Malaysia, Indonesia) categorized as 'restructured' compared to the 1st and 2nd Waves?",
+                options: [
+                    "They relied primarily on state-owned heavy steel mills and naval shipyards.",
+                    "They bypassed heavy industrial factories, generating middle-class wealth through BPOs, OFW remittances, and light assembly.",
+                    "They banned all foreign capital and adopted isolated agrarian communism.",
+                    "They were the first to manufacture high-end semiconductors in the 1950s."
+                ],
+                correct: 1,
+                explanation: "The 3rd wave restructured away from traditional heavy factories, relying on service exports (BPOs), overseas foreign worker remittances (money exchange into local currency), and light assembly."
+            },
+            {
+                question: "What unique geographic loop does the 1980 Brandt Line make on the world map?",
+                options: [
+                    "It loops north to exclude Eastern Europe from the Global North.",
+                    "It loops south around Australia and New Zealand to classify them in the Global North based on GDP per capita.",
+                    "It cuts directly through South America along the equator.",
+                    "It circles Japan to include it in the Global South."
+                ],
+                correct: 1,
+                explanation: "Proposed by Willy Brandt, the line is economic rather than geographical. It loops far south around Australia and New Zealand to include them in the Global North due to their high GDP per capita."
+            },
+            {
+                question: "Which ratio accurately reflects the Global North's share of world population versus global income?",
+                options: [
+                    "75% of population, 80% of income.",
+                    "25% of population, 80% of global income (and 90% of manufacturing).",
+                    "50% of population, 50% of income.",
+                    "25% of population, 20% of global income."
+                ],
+                correct: 1,
+                explanation: "The Global North has 1/4 (25%) of the world population but controls 4/5 (80%) of global wealth and 90% of manufacturing power."
+            },
+            {
+                question: "How did Deng Xiaoping restructure China's economy during the 4th Wave (post-1978)?",
+                options: [
+                    "By replacing urban manufacturing with agrarian farming collectives.",
+                    "By creating Special Economic Zones (SEZs like Shenzhen) to welcome foreign direct investment (FDI) under state capitalism.",
+                    "By shifting the entire economy to rely on call centers and foreign labor remittances.",
+                    "By closing China's borders to all international trade."
+                ],
+                correct: 1,
+                explanation: "China's 4th Wave restructuring established SEZs (Shenzhen, Shanghai, Beijing), transforming a rigid communist state into the 'world's factory' through controlled market incentives and FDI."
+            },
+            {
+                question: "How do Multinational Corporations (MNCs) act as the primary engine driving Benjamin Barber's 'McWorld'?",
+                options: [
+                    "By enforcing intergovernmental treaties that preserve rural isolation.",
+                    "By spreading uniform commercial consumer culture, Western brands, and standardized market practices globally.",
+                    "By eliminating all foreign direct investment in developing nations.",
+                    "By encouraging localized tribal economic bartering systems."
+                ],
+                correct: 1,
+                explanation: "McWorld represents global commercial and cultural homogenization, driven by MNCs expanding Western consumer capitalism, media, and technology across national borders."
+            },
+            {
+                question: "What is the primary difference between Colonialism and Neocolonialism?",
+                options: [
+                    "Colonialism involves indirect debt leverage; Neocolonialism involves physical military occupation.",
+                    "Colonialism is direct physical settlement and foreign rule; Neocolonialism is indirect economic dominance via debt, trade, and MNC leverage.",
+                    "Colonialism applied only to Japan; Neocolonialism applied to the Asian Tigers.",
+                    "There is no difference; both terms mean identical trade agreements."
+                ],
+                correct: 1,
+                explanation: "Colonialism relies on direct military occupation and foreign settlement. Neocolonialism is modern indirect dominance over developing nations through economic debt, trade imbalances, and MNC power."
+            },
+            {
+                question: "Why is job displacement considered a structural disadvantage during economic restructuring?",
+                options: [
+                    "Because it guarantees immediate salary increases for all legacy workers.",
+                    "Because workers in traditional sectors (agriculture/basic factories) face skill mismatches when jobs shift to high-tech or service BPOs.",
+                    "Because MNCs never relocate their manufacturing plants once established.",
+                    "Because it only affects high-income executives in the Global North."
+                ],
+                correct: 1,
+                explanation: "Job displacement causes structural unemployment because displaced workers in legacy industries lack the specialized training or English skills needed for new BPO or IT positions."
+            },
+            {
+                question: "Why did Asian economies transition from Import Substitution Industrialization (ISI) to Export-Oriented Industrialization (EOI)?",
+                options: [
+                    "To stop all trade with Western nations.",
+                    "To manufacture goods targeted at wealthy consumer markets in the Global North, earning valuable foreign exchange.",
+                    "To ensure products were only bought by local domestic households.",
+                    "To focus exclusively on agricultural raw resource exports."
+                ],
+                correct: 1,
+                explanation: "EOI allowed East and Southeast Asian nations to tap into the high purchasing power of Global North markets, bringing in foreign capital to fund domestic middle-class growth."
+            },
+            {
+                question: "What role does 'money exchange' play in the 3rd Wave middle-class expansion?",
+                options: [
+                    "It forces families to build local steel mills.",
+                    "It converts foreign currency earnings from OFWs into local money, directly boosting domestic family spending, housing, and retail growth.",
+                    "It prevents foreign direct investment from entering the country.",
+                    "It restricts trade to local bartering systems."
+                ],
+                correct: 1,
+                explanation: "OFW remittances sent in foreign currencies (USD, AED) are exchanged into local pesos/baht, directly upgrading household living standards without requiring heavy domestic industrial plants."
+            },
+            {
+                question: "Which of the following correctly pairs an Asian growth wave with its representative heavy industrial engine?",
+                options: [
+                    "3rd Wave (Philippines) — Steel mills and heavy shipyards.",
+                    "1st Wave (Japan) — Post-WWII heavy industrial plants (steel, automobiles, heavy machinery).",
+                    "4th Wave (China) — Complete reliance on OFW remittances.",
+                    "2nd Wave (Asian Tigers) — Pure reliance on agricultural raw commodity exports."
+                ],
+                correct: 1,
+                explanation: "Japan's 1st Wave was built on heavy industrial plants (steel mills, shipbuilding, automotive manufacturing), establishing traditional industrial expansion."
+            }
+        ];
+
+        // ==========================================
+        // APP STATE
+        // ==========================================
+        let currentTab = 'flashcards';
+        
+        // Flashcard State
+        let activeFlashcards = [...FLASHCARD_DATA];
+        let fcIndex = 0;
+        let isFlipped = false;
+        let cardProgress = JSON.parse(localStorage.getItem('fc_progress') || '{}');
+
+        // Matching State
+        let selectedTermTile = null;
+        let selectedDefTile = null;
+        let matchedCount = 0;
+        let matchMoves = 0;
+        let matchTimerInterval = null;
+        let matchSeconds = 0;
+
+        // Quiz State
+        let quizIndex = 0;
+        let quizScore = 0;
+        let quizAnswered = false;
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        window.onload = function() {
+            renderFlashcard();
+            updateProgressCounts();
+            initMatchingGame();
+            renderQuizQuestion();
+
+            // Keyboard navigation for flashcards
+            document.addEventListener('keydown', (e) => {
+                if (currentTab !== 'flashcards') return;
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    flipCard();
+                } else if (e.code === 'ArrowRight') {
+                    nextCard();
+                } else if (e.code === 'ArrowLeft') {
+                    prevCard();
+                }
+            });
+        };
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            currentTab = tabId;
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-indigo-400');
+                btn.classList.add('text-slate-400');
+            });
+
+            document.getElementById(`sec-${tabId}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            activeBtn.classList.add('bg-slate-800', 'text-indigo-400');
+            activeBtn.classList.remove('text-slate-400');
+
+            if (tabId === 'matching' && matchTimerInterval === null) {
+                initMatchingGame();
+            }
+        }
+
+        // ==========================================
+        // FLASHCARD MODULE
+        // ==========================================
+        function filterFlashcards(topic) {
+            document.querySelectorAll('.fc-filter').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            event.target.classList.remove('bg-slate-800', 'text-slate-300');
+            event.target.classList.add('bg-indigo-600', 'text-white');
+
+            if (topic === 'all') {
+                activeFlashcards = [...FLASHCARD_DATA];
+            } else {
+                activeFlashcards = FLASHCARD_DATA.filter(c => c.category === topic);
+            }
+            fcIndex = 0;
+            isFlipped = false;
+            renderFlashcard();
+        }
+
+        function shuffleFlashcards() {
+            activeFlashcards.sort(() => Math.random() - 0.5);
+            fcIndex = 0;
+            isFlipped = false;
+            renderFlashcard();
+        }
+
+        function renderFlashcard() {
+            if (activeFlashcards.length === 0) return;
+            const card = activeFlashcards[fcIndex];
+            
+            // Reset Flip
+            const inner = document.getElementById('flashcard-inner');
+            inner.classList.remove('rotate-y-180');
+            isFlipped = false;
+
+            setTimeout(() => {
+                document.getElementById('fc-category-badge').innerText = card.categoryLabel;
+                document.getElementById('fc-index').innerText = fcIndex + 1;
+                document.getElementById('fc-total').innerText = activeFlashcards.length;
+
+                // Front
+                document.getElementById('fc-front-title').innerText = card.frontTitle;
+                document.getElementById('fc-front-subtitle').innerText = card.frontSubtitle;
+
+                // Back
+                document.getElementById('fc-back-text').innerText = card.backText;
+                const bulletsContainer = document.getElementById('fc-back-bullets');
+                bulletsContainer.innerHTML = card.bullets.map(b => `<p>• ${b}</p>`).join('');
+            }, 150);
+        }
+
+        function flipCard() {
+            isFlipped = !isFlipped;
+            const inner = document.getElementById('flashcard-inner');
+            if (isFlipped) {
+                inner.classList.add('rotate-y-180');
+            } else {
+                inner.classList.remove('rotate-y-180');
+            }
+        }
+
+        function nextCard() {
+            if (fcIndex < activeFlashcards.length - 1) {
+                fcIndex++;
+                renderFlashcard();
+            } else {
+                fcIndex = 0; // Loop back
+                renderFlashcard();
+            }
+        }
+
+        function prevCard() {
+            if (fcIndex > 0) {
+                fcIndex--;
+                renderFlashcard();
+            } else {
+                fcIndex = activeFlashcards.length - 1;
+                renderFlashcard();
+            }
+        }
+
+        function markCard(gotIt) {
+            const card = activeFlashcards[fcIndex];
+            cardProgress[card.id] = gotIt ? 'gotit' : 'review';
+            localStorage.setItem('fc_progress', JSON.stringify(cardProgress));
+            updateProgressCounts();
+            nextCard();
+        }
+
+        function updateProgressCounts() {
+            let gotIt = 0;
+            let review = 0;
+            Object.values(cardProgress).forEach(val => {
+                if (val === 'gotit') gotIt++;
+                if (val === 'review') review++;
+            });
+            document.getElementById('count-gotit').innerText = gotIt;
+            document.getElementById('count-review').innerText = review;
+        }
+
+        function resetFlashcardProgress() {
+            cardProgress = {};
+            localStorage.removeItem('fc_progress');
+            updateProgressCounts();
+        }
+
+        // ==========================================
+        // MATCHING DRILL MODULE
+        // ==========================================
+        function initMatchingGame() {
+            matchedCount = 0;
+            matchMoves = 0;
+            selectedTermTile = null;
+            selectedDefTile = null;
+            clearInterval(matchTimerInterval);
+            matchSeconds = 0;
+            document.getElementById('match-timer').innerText = "00:00";
+            document.getElementById('match-moves').innerText = "0";
+            document.getElementById('match-score').innerText = `0 / ${MATCHING_PAIRS.length}`;
+
+            // Start timer
+            matchTimerInterval = setInterval(() => {
+                matchSeconds++;
+                const mins = String(Math.floor(matchSeconds / 60)).padStart(2, '0');
+                const secs = String(matchSeconds % 60).padStart(2, '0');
+                document.getElementById('match-timer').innerText = `${mins}:${secs}`;
+            }, 1000);
+
+            // Shuffle terms and defs independently
+            const terms = [...MATCHING_PAIRS].sort(() => Math.random() - 0.5);
+            const defs = [...MATCHING_PAIRS].sort(() => Math.random() - 0.5);
+
+            const termsCol = document.getElementById('terms-column');
+            const defsCol = document.getElementById('defs-column');
+
+            termsCol.innerHTML = terms.map(item => `
+                <button onclick="handleTileClick(this, 'term', ${item.id})" class="tile-btn term-tile w-full p-4 rounded-xl bg-slate-900 border border-slate-800 text-left text-sm font-semibold hover:border-indigo-500 transition shadow-md flex items-center justify-between">
+                    <span>${item.term}</span>
+                    <i class="fa-solid fa-chevron-right text-xs text-slate-600"></i>
+                </button>
+            `).join('');
+
+            defsCol.innerHTML = defs.map(item => `
+                <button onclick="handleTileClick(this, 'def', ${item.id})" class="tile-btn def-tile w-full p-4 rounded-xl bg-slate-900 border border-slate-800 text-left text-xs md:text-sm text-slate-300 hover:border-indigo-500 transition shadow-md">
+                    ${item.def}
+                </button>
+            `).join('');
+        }
+
+        function handleTileClick(btn, type, id) {
+            if (btn.classList.contains('matched')) return;
+
+            if (type === 'term') {
+                document.querySelectorAll('.term-tile').forEach(b => b.classList.remove('border-indigo-500', 'bg-indigo-950/40'));
+                selectedTermTile = { btn, id };
+                btn.classList.add('border-indigo-500', 'bg-indigo-950/40');
+            } else {
+                document.querySelectorAll('.def-tile').forEach(b => b.classList.remove('border-indigo-500', 'bg-indigo-950/40'));
+                selectedDefTile = { btn, id };
+                btn.classList.add('border-indigo-500', 'bg-indigo-950/40');
+            }
+
+            // Check Match
+            if (selectedTermTile && selectedDefTile) {
+                matchMoves++;
+                document.getElementById('match-moves').innerText = matchMoves;
+
+                if (selectedTermTile.id === selectedDefTile.id) {
+                    // Correct Match
+                    markMatched(selectedTermTile.btn);
+                    markMatched(selectedDefTile.btn);
+                    matchedCount++;
+                    document.getElementById('match-score').innerText = `${matchedCount} / ${MATCHING_PAIRS.length}`;
+                    
+                    selectedTermTile = null;
+                    selectedDefTile = null;
+
+                    if (matchedCount === MATCHING_PAIRS.length) {
+                        clearInterval(matchTimerInterval);
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    }
+                } else {
+                    // Mismatch feedback
+                    const tBtn = selectedTermTile.btn;
+                    const dBtn = selectedDefTile.btn;
+                    tBtn.classList.add('border-rose-500', 'bg-rose-950/40');
+                    dBtn.classList.add('border-rose-500', 'bg-rose-950/40');
+                    
+                    setTimeout(() => {
+                        tBtn.classList.remove('border-indigo-500', 'bg-indigo-950/40', 'border-rose-500', 'bg-rose-950/40');
+                        dBtn.classList.remove('border-indigo-500', 'bg-indigo-950/40', 'border-rose-500', 'bg-rose-950/40');
+                        selectedTermTile = null;
+                        selectedDefTile = null;
+                    }, 500);
+                }
+            }
+        }
+
+        function markMatched(btn) {
+            btn.classList.remove('border-indigo-500', 'bg-indigo-950/40');
+            btn.classList.add('matched', 'border-emerald-500/50', 'bg-emerald-950/30', 'text-emerald-300', 'cursor-default');
+            btn.disabled = true;
+        }
+
+        // ==========================================
+        // SPEED QUIZ MODULE
+        // ==========================================
+        function renderQuizQuestion() {
+            const q = QUIZ_QUESTIONS[quizIndex];
+            quizAnswered = false;
+
+            document.getElementById('quiz-current-num').innerText = quizIndex + 1;
+            document.getElementById('quiz-total-num').innerText = QUIZ_QUESTIONS.length;
+            document.getElementById('quiz-progress').style.width = `${((quizIndex + 1) / QUIZ_QUESTIONS.length) * 100}%`;
+
+            document.getElementById('quiz-question-text').innerText = q.question;
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            document.getElementById('quiz-next-btn').disabled = true;
+
+            const optsContainer = document.getElementById('quiz-options-container');
+            optsContainer.innerHTML = q.options.map((opt, idx) => `
+                <button onclick="selectQuizOption(${idx})" class="quiz-opt-btn w-full p-4 rounded-xl bg-slate-950 border border-slate-800 hover:border-indigo-500 text-left text-xs md:text-sm text-slate-200 font-medium transition flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-slate-800 text-slate-400 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">${String.fromCharCode(65 + idx)}</span>
+                    <span class="flex-1">${opt}</span>
+                </button>
+            `).join('');
+        }
+
+        function selectQuizOption(selectedIdx) {
+            if (quizAnswered) return;
+            quizAnswered = true;
+
+            const q = QUIZ_QUESTIONS[quizIndex];
+            const buttons = document.querySelectorAll('.quiz-opt-btn');
+            const feedbackBox = document.getElementById('quiz-feedback');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const feedbackExp = document.getElementById('feedback-explanation');
+
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === q.correct) {
+                    btn.classList.add('border-emerald-500', 'bg-emerald-950/40', 'text-emerald-200');
+                } else if (idx === selectedIdx) {
+                    btn.classList.add('border-rose-500', 'bg-rose-950/40', 'text-rose-200');
+                }
+            });
+
+            if (selectedIdx === q.correct) {
+                quizScore++;
+                feedbackBox.className = "p-4 rounded-xl border border-emerald-500/40 bg-emerald-950/30 text-emerald-300 space-y-1";
+                feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> Correct!`;
+            } else {
+                feedbackBox.className = "p-4 rounded-xl border border-rose-500/40 bg-rose-950/30 text-rose-300 space-y-1";
+                feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-400"></i> Incorrect`;
+            }
+
+            feedbackExp.innerText = q.explanation;
+            feedbackBox.classList.remove('hidden');
+            document.getElementById('quiz-next-btn').disabled = false;
+        }
+
+        function nextQuizQuestion() {
+            if (quizIndex < QUIZ_QUESTIONS.length - 1) {
+                quizIndex++;
+                renderQuizQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-card').classList.add('hidden');
+            const resultsEl = document.getElementById('quiz-results');
+            resultsEl.classList.remove('hidden');
+
+            const pct = Math.round((quizScore / QUIZ_QUESTIONS.length) * 100);
+            document.getElementById('quiz-final-score').innerText = `${quizScore} / ${QUIZ_QUESTIONS.length}`;
+            document.getElementById('quiz-final-pct').innerText = `${pct}% Accuracy`;
+
+            const evalText = document.getElementById('quiz-evaluation');
+            if (pct >= 80) {
+                evalText.innerText = "Outstanding! Your active recall across all 4 Waves, the Brandt Line, MNCs, and McWorld is rock-solid. You are completely ready to ace your exam!";
+                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+            } else if (pct >= 60) {
+                evalText.innerText = "Solid progress! Review the flashcards and cheat sheet once more to lock in the 3rd/4th wave restructuring differences and Brandt line stats.";
+            } else {
+                evalText.innerText = "Keep practicing! Spend a few extra minutes reviewing the Cheat Sheet table and retake this speed quiz.";
+            }
+        }
+
+        function resetQuiz() {
+            quizIndex = 0;
+            quizScore = 0;
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            renderQuizQuestion();
+        }
+    </script>
+</body>
+</html>
